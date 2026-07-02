@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Piyush Chhaiya | Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0A0F1E;
+    --surface: #111827;
+    --card: #161D2F;
+    --border: #1E2A42;
+    --accent: #3B82F6;
+    --accent2: #6366F1;
+    --gold: #F59E0B;
+    --text: #F1F5F9;
+    --muted: #94A3B8;
+    --dim: #475569;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 4rem;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 800; font-size: 1.2rem;
+    color: var(--text);
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 6rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; width: 100%;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 2rem; height: 1px; background: var(--accent);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 800; line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .hero-role {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+  }
+  .hero-desc {
+    color: var(--muted); font-size: 1rem;
+    max-width: 480px; margin-bottom: 2rem; line-height: 1.75;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 0.75rem 1.75rem;
+    background: var(--accent); color: white;
+    border: none; border-radius: 6px;
+    font-family: var(--font-body); font-weight: 600; font-size: 0.9rem;
+    cursor: pointer; text-decoration: none;
+    transition: opacity 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-outline {
+    padding: 0.75rem 1.75rem;
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border); border-radius: 6px;
+    font-family: var(--font-body); font-weight: 500; font-size: 0.9rem;
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+  .hero-right { display: flex; flex-direction: column; gap: 1rem; }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem; font-weight: 800; color: var(--accent);
+  }
+  .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+  .tech-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem;
+  }
+  .tag {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    padding: 0.3rem 0.7rem; background: var(--border);
+    border-radius: 4px; color: var(--muted);
+  }
+  .tag.hi { background: rgba(59,130,246,0.15); color: var(--accent); }
+
+  .bg-grid {
+    position: absolute; inset: 0; z-index: -1;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    opacity: 0.3;
+  }
+
+  section { padding: 6rem 4rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; margin-bottom: 1rem;
+  }
+  .section-line {
+    width: 3rem; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    margin-bottom: 3rem;
+  }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 1rem; line-height: 1.8; }
+  .info-list { list-style: none; margin-top: 1.5rem; }
+  .info-list li {
+    display: flex; gap: 1rem; padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border); font-size: 0.9rem;
+  }
+  .info-list .key { color: var(--muted); min-width: 90px; font-weight: 500; }
+  .info-list .val { color: var(--text); }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; }
+  .skill-pill {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem; text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-pill:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .skill-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+  .skill-name { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+  .skill-cat { font-size: 0.68rem; color: var(--dim); margin-top: 0.1rem; }
+
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .tl-item { position: relative; margin-bottom: 2.5rem; }
+  .tl-dot {
+    position: absolute; left: -2rem; top: 0.3rem;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--bg);
+    transform: translateX(-4px);
+  }
+  .tl-period { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); margin-bottom: 0.3rem; }
+  .tl-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.15rem; }
+  .tl-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.6rem; }
+  .tl-bullets { list-style: none; }
+  .tl-bullets li {
+    font-size: 0.85rem; color: var(--muted);
+    padding: 0.2rem 0 0.2rem 1rem; position: relative;
+  }
+  .tl-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .proj-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .proj-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .proj-header { display: flex; justify-content: space-between; align-items: flex-start; }
+  .proj-icon { font-size: 1.75rem; }
+  .proj-badge {
+    font-family: var(--font-mono); font-size: 0.68rem;
+    padding: 0.2rem 0.6rem; border-radius: 4px;
+    background: rgba(59,130,246,0.1); color: var(--accent);
+    border: 1px solid rgba(59,130,246,0.2);
+  }
+  .proj-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; }
+  .proj-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
+  .proj-tag {
+    font-size: 0.68rem; padding: 0.2rem 0.6rem;
+    background: var(--border); border-radius: 4px;
+    color: var(--dim); font-family: var(--font-mono);
+  }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.25rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.25rem;
+  }
+  .contact-icon { font-size: 1.25rem; }
+  .contact-label { font-size: 0.72rem; color: var(--dim); margin-bottom: 0.1rem; }
+  .contact-val { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+  .social-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .social-btn {
+    padding: 0.6rem 1.2rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--muted);
+    text-decoration: none; font-size: 0.85rem; font-weight: 500;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .contact-right p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem; text-align: center;
+    color: var(--dim); font-size: 0.8rem;
+  }
+  .full-divider { border: none; border-top: 1px solid var(--border); margin: 0 4rem; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #home, section { padding: 5rem 1.5rem 3rem; }
+    .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .full-divider { margin: 0 1.5rem; }
+    footer { padding: 2rem 1.5rem; }
+  }
+
+.proj-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+.proj-link {
+  font-size: 0.85rem;
+  padding: 6px 12px;
+  border: 1px solid #3b82f6;
+  border-radius: 6px;
+  color: #3b82f6;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.proj-link:hover {
+  background: #3b82f6;
+  color: #fff;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Piyush<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div id="home" style="min-height:100vh; display:flex; align-items:center; padding:6rem 4rem 4rem; position:relative; overflow:hidden;">
+  <div class="bg-grid"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow">Available for opportunities</div>
+      <h1>Piyush Chhaiya</h1>
+      <div class="hero-role">Data Analyst & Power BI Developer</div>
+      <p class="hero-desc">B.E. graduate in AI & Data Science from GEC Rajkot. I turn raw data into clear insights — using SQL, Power BI, and Python to build dashboards that drive real business decisions.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-num">6+</div><div class="stat-label">Projects Completed</div></div>
+        <div class="stat-card"><div class="stat-num">8.01</div><div class="stat-label">CGPA — GEC Rajkot</div></div>
+        <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Certifications</div></div>
+        <div class="stat-card"><div class="stat-num">₹6M+</div><div class="stat-label">Sales Data Analyzed</div></div>
+      </div>
+      <div class="tech-tags">
+        <span class="tag hi">Power BI</span><span class="tag hi">SQL</span>
+        <span class="tag hi">Python</span><span class="tag hi">DAX</span>
+        <span class="tag">Streamlit</span><span class="tag">Power Query</span>
+        <span class="tag">Pandas</span><span class="tag">Matplotlib</span>
+        <span class="tag">Tableau</span><span class="tag">Excel</span>
+        <span class="tag">SSMS</span><span class="tag">Plotly</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="full-divider"/>
+
+<section id="about">
+  <div class="section-label">Who I am</div>
+  <div class="section-title">About Me</div>
+  <div class="section-line"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a B.E. graduate in Artificial Intelligence & Data Science from Government Engineering College, Rajkot (CGPA 8.06). I'm passionate about making data useful — not just readable.</p>
+      <p>My work spans the full analytics pipeline: from writing SQL queries in SSMS and building star schema data models, to designing Power BI dashboards with DAX measures and creating Python-based analytics tools with Streamlit.</p>
+      <p>I completed a Data Analytics internship at Infolabz IT Services where I built end-to-end sales dashboards used for real business decisions. I'm now actively seeking a full-time Data Analyst or Power BI Developer role.</p>
+      <ul class="info-list">
+        <li><span class="key">Name</span><span class="val">Piyush Chhaiya</span></li>
+        <li><span class="key">Email</span><span class="val">chhaiyapiyush5883@gmail.com</span></li>
+        <li><span class="key">Phone</span><span class="val">+91 9328166299</span></li>
+        <li><span class="key">Location</span><span class="val">Rajkot, Gujarat, India</span></li>
+        <li><span class="key">Degree</span><span class="val">B.E. — AI & Data Science (2026)</span></li>
+        <li><span class="key">Status</span><span class="val" style="color:#22C55E;">✓ Open to Work</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="section-label" style="margin-bottom:1.25rem;">Core Skills</div>
+      <div class="skills-grid">
+        <div class="skill-pill"><div class="skill-icon">📊</div><div class="skill-name">Power BI</div><div class="skill-cat">BI & Visualization</div></div>
+        <div class="skill-pill"><div class="skill-icon">🗄️</div><div class="skill-name">SQL / SSMS</div><div class="skill-cat">Database</div></div>
+        <div class="skill-pill"><div class="skill-icon">🐍</div><div class="skill-name">Python</div><div class="skill-cat">Programming</div></div>
+        <div class="skill-pill"><div class="skill-icon">📐</div><div class="skill-name">DAX</div><div class="skill-cat">Power BI</div></div>
+        <div class="skill-pill"><div class="skill-icon">🔄</div><div class="skill-name">Power Query</div><div class="skill-cat">ETL</div></div>
+        <div class="skill-pill"><div class="skill-icon">🌐</div><div class="skill-name">Streamlit</div><div class="skill-cat">App Dev</div></div>
+        <div class="skill-pill"><div class="skill-icon">📈</div><div class="skill-name">Tableau</div><div class="skill-cat">Visualization</div></div>
+        <div class="skill-pill"><div class="skill-icon">📋</div><div class="skill-name">Excel</div><div class="skill-cat">Analysis</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider"/>
+
+<section id="experience">
+  <div class="section-label">Background</div>
+  <div class="section-title">Experience & Education</div>
+  <div class="section-line"></div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem;">
+    <div>
+      <div class="section-label" style="margin-bottom:1.5rem;">Work Experience</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-period">Jan 2026 – Apr 2026</div>
+          <div class="tl-title">Data Analytics Intern</div>
+          <div class="tl-sub">Infolabz IT Services, Rajkot</div>
+          <ul class="tl-bullets">
+            <li>Built end-to-end sales analytics dashboard using Python & Streamlit</li>
+            <li>Developed data cleaning pipelines and computed KPIs like total sales and growth rate</li>
+            <li>Created interactive charts (line, bar, heatmap) with drill-down capabilities</li>
+            <li>Delivered unified dashboard enabling faster data-driven decisions</li>
+          </ul>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-period">Summer Internship</div>
+          <div class="tl-title">Data Analytics Intern</div>
+          <div class="tl-sub">GTU IBM SkillsBuild Program</div>
+          <ul class="tl-bullets">
+            <li>Worked with real agricultural datasets for data visualization & analysis</li>
+            <li>Built Agriculture Dashboard tracking crop yield, revenue & profit</li>
+            <li>Delivered complete data story through visual analytics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label" style="margin-bottom:1.5rem;">Education</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-period">2022 – 2026</div>
+          <div class="tl-title">B.E. — AI & Data Science</div>
+          <div class="tl-sub">Government Engineering College, Rajkot · CGPA 8.06</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-period">2021 – 2022</div>
+          <div class="tl-title">12th Science</div>
+          <div class="tl-sub">Purohit Science School, Jamnagar</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-period">2019 – 2020</div>
+          <div class="tl-title">10th Standard</div>
+          <div class="tl-sub">Krishna Science School, Jamnagar</div>
+        </div>
+      </div>
+      <div class="section-label" style="margin:2rem 0 1rem;">Certifications</div>
+      <div style="display:flex; flex-direction:column; gap:0.6rem;">
+        <div class="contact-item" style="padding:0.75rem 1rem;"><span>🏅</span><div><div class="contact-label">HackerRank</div><div class="contact-val" style="font-size:0.85rem;">SQL Intermediate</div></div></div>
+        <div class="contact-item" style="padding:0.75rem 1rem;"><span>🏅</span><div><div class="contact-label">Cognitive Class</div><div class="contact-val" style="font-size:0.85rem;">Python for Data Science</div></div></div>
+        <div class="contact-item" style="padding:0.75rem 1rem;"><span>🏅</span><div><div class="contact-label">Cognitive Class</div><div class="contact-val" style="font-size:0.85rem;">Data Analysis with Python</div></div></div>
+        <div class="contact-item" style="padding:0.75rem 1rem;"><span>🏅</span><div><div class="contact-label">Deloitte · Forage</div><div class="contact-val" style="font-size:0.85rem;">Data Analytics Job Simulation</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider"/>
+
+<section id="projects">
+  <div class="section-label">What I've built</div>
+  <div class="section-title">Projects</div>
+  <div class="section-line"></div>
+  <div class="projects-grid">
+
+
+
+    <div class="proj-card">
+  <div class="proj-header"><div class="proj-icon">🛒</div><span class="proj-badge">SQL + Power BI</span></div>
+  <div class="proj-name">India Retail Sales Dashboard</div>
+  <div class="proj-desc">End-to-end analytics on ₹75.58M retail sales across 7 Indian states, 5 categories & 2 sales channels. Built Star Schema model with DAX KPIs and interactive slicers.</div>
+  <div class="proj-tags"><span class="proj-tag">SQL Server</span><span class="proj-tag">Power BI</span><span class="proj-tag">DAX</span><span class="proj-tag">Power Query</span><span class="proj-tag">Star Schema</span></div>
+  <div class="proj-links">
+    <a href="https://app.powerbi.com/links/WhQLuFNaxJ?ctid=f57b4dd1-8bad-47be-899d-8074b3f31249&pbi_source=linkShare" target="_blank" class="proj-link">🔗 View Dashboard</a>
+  </div>
+</div>
+
+
+
+    <div class="proj-card">
+  <div class="proj-header"><div class="proj-icon">🟢</div><span class="proj-badge">Power BI</span></div>
+  <div class="proj-name">Blinkit Sales Dashboard</div>
+  <div class="proj-desc">Interactive dashboard monitoring sales trends, outlet performance, and item categories. Surfaced KPIs on revenue, customer ratings, and inventory optimization.</div>
+  <div class="proj-tags"><span class="proj-tag">Power BI</span><span class="proj-tag">DAX</span><span class="proj-tag">Power Query</span><span class="proj-tag">Excel</span></div>
+  <div class="proj-links">
+    <a href="https://app.powerbi.com/links/Xe7D9A0KoA?ctid=f57b4dd1-8bad-47be-899d-8074b3f31249&pbi_source=linkShare" target="_blank" class="proj-link">🔗 View Dashboard</a>
+  </div>
+</div>
+
+
+    <div class="proj-card">
+  <div class="proj-header"><div class="proj-icon">📦</div><span class="proj-badge">Python + Streamlit</span></div>
+  <div class="proj-name">Intelligent Sales Analytics Dashboard</div>
+  <div class="proj-desc">Multi-page dashboard analyzing ₹6.1M+ grocery sales across 7 categories, 5 regions & 4 years. Includes treemap drill-down, region comparisons & login authentication.</div>
+  <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Streamlit</span><span class="proj-tag">Plotly</span><span class="proj-tag">Pandas</span></div>
+  <div class="proj-links">
+    <a href="https://intelligent-sales-analytics--dashboard.streamlit.app" target="_blank" class="proj-link">🔗 View Dashboard</a>
+  </div>
+</div>
+
+
+    <div class="proj-card">
+  <div class="proj-header"><div class="proj-icon">🌾</div><span class="proj-badge">Tableau</span></div>
+  <div class="proj-name">Agriculture Dashboard</div>
+  <div class="proj-desc">Visualized crop yield, regional performance, revenue & profit metrics for agri-tech stakeholders. Delivered complete data story through visual analytics.</div>
+  <div class="proj-tags"><span class="proj-tag">Tableau</span><span class="proj-tag">Data Visualization</span><span class="proj-tag">EDA</span></div>
+  <div class="proj-links">
+    <a href="https://public.tableau.com/views/AgricultureDashboard_17523988204650/Agriculture_Dashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" class="proj-link">🔗 View Dashboard</a>
+  </div>
+</div>
+
+
+    <div class="proj-card">
+  <div class="proj-header"><div class="proj-icon">🪔</div><span class="proj-badge">Python EDA</span></div>
+  <div class="proj-name">Diwali Sales EDA</div>
+  <div class="proj-desc">Analyzed sales across age groups, genders & product categories to uncover purchasing patterns. Improved sales targeting efficiency by 20% through 15+ visual insights.</div>
+  <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Pandas</span><span class="proj-tag">Matplotlib</span><span class="proj-tag">Seaborn</span></div>
+  <div class="proj-links">
+    <a href="https://github.com/Piyushchhaiya5883/Data-Analysis" target="_blank" class="proj-link">📄 View Notebook</a>
+  </div>
+</div>
+
+
+    <div class="proj-card">
+  <div class="proj-header"><div class="proj-icon">🛍️</div><span class="proj-badge">Power BI</span></div>
+  <div class="proj-name">Customer Shopping Behavior Dashboard</div>
+  <div class="proj-desc">Power BI dashboard analyzing customer purchasing patterns, preferences, and segmentation to help businesses understand their customer base better.</div>
+  <div class="proj-tags"><span class="proj-tag">Power BI</span><span class="proj-tag">DAX</span><span class="proj-tag">Excel</span></div>
+  <div class="proj-links">
+    <a href="https://app.powerbi.com/links/BcTWHHPdtV?ctid=f57b4dd1-8bad-47be-899d-8074b3f31249&pbi_source=linkShareE" target="_blank" class="proj-link">🔗 View Dashboard</a>
+  </div>
+</div>
+</section>
+
+<hr class="full-divider"/>
+
+<section id="contact">
+  <div class="section-label">Let's connect</div>
+  <div class="section-title">Get in Touch</div>
+  <div class="section-line"></div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="contact-item"><div class="contact-icon">📧</div><div><div class="contact-label">Email</div><div class="contact-val">chhaiyapiyush5883@gmail.com</div></div></div>
+      <div class="contact-item"><div class="contact-icon">📱</div><div><div class="contact-label">Phone</div><div class="contact-val">+91 9328166299</div></div></div>
+      <div class="contact-item"><div class="contact-icon">📍</div><div><div class="contact-label">Location</div><div class="contact-val">Dwarka, Gujarat, India</div></div></div>
+      <div class="social-row">
+        <a href="https://www.linkedin.com/in/piyush-chhaiya-810231317" class="social-btn">🔗 LinkedIn</a>
+        <a href="https://github.com/Piyushchhaiya5883" class="social-btn">💻 GitHub</a>
+        <a href="./Resume.pdf" class="social-btn">📄 Resume</a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <p>I'm actively looking for Data Analyst and Power BI Developer opportunities. If you're hiring or want to collaborate on a data project, feel free to reach out — I'd love to connect.</p>
+      <p style="color:var(--dim); font-size:0.85rem;">Based in Rajkot, Gujarat · Open to remote & on-site roles across India</p>
+      <a href="mailto:chhaiyapiyush5883@gmail.com" class="btn-primary" style="margin-top:1rem; display:inline-block;">Send me an Email →</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Piyush Chhaiya · Built with passion for data</footer>
+
+</body>
+</html>
